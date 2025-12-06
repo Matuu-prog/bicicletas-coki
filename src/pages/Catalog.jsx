@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // <--- Importamos Link
-import { products } from '../data/products';
+import { useProducts } from '../context/ProductContext';
 import { useCart } from '../context/CartContext'; // <--- 1. Importamos el hook del carrito
 
 const Catalog = () => {
+  const { products } = useProducts();
   const [selectedFilter, setSelectedFilter] = useState('Todos');
   const [openMenu, setOpenMenu] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+import { useProducts } from '../context/ProductContext';
 
 const Checkout = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { cartItems, cartTotal } = useCart();
+  const { addOrder } = useProducts();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,6 +15,13 @@ const Checkout = () => {
     
     // Simulamos una demora de 2 segundos como si procesara el pago
     setTimeout(() => {
+
+      addOrder({
+        customer: "Cliente Simulado", // Aquí podrías usar los datos del input real
+        items: cartItems,
+        total: cartTotal
+      });
+
       setIsProcessing(false);
       setIsSuccess(true);
     }, 2000);
@@ -27,9 +39,9 @@ const Checkout = () => {
         <p className="text-green-700 max-w-md">
           Gracias por tu compra! Recibirás un email con tu factura.
         </p>
-        <a href="/" className="mt-8 bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition">
-          Volver al inicio
-        </a>
+        <Link to="/" className="mt-8 bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition">
+  Volver al inicio
+</Link>
       </div>
     );
   }

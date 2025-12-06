@@ -1,9 +1,11 @@
 import React, { useState } from 'react'; // <--- Importamos useState
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const { cartCount } = useCart();
+  const { isAdmin } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Estado para el menú móvil
 
   const toggleMenu = () => {
@@ -27,6 +29,13 @@ const Navbar = () => {
             <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">Inicio</Link>
             <Link to="/catalogo" className="text-gray-700 hover:text-blue-600 font-medium">Catálogo</Link>
             
+            {isAdmin && (
+              <Link to="/admin" className="text-blue-600 font-bold hover:text-blue-800 border-2 border-blue-600 px-3 py-1 rounded-md">
+                Panel Admin
+              </Link>
+            )}
+
+
             {/* Botón Carrito Escritorio */}
             <Link to="/carrito" className="relative text-gray-700 hover:text-blue-600">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,6 +88,12 @@ const Navbar = () => {
             >
               Catálogo
             </Link>
+
+             {isAdmin && (
+              <Link to="/admin" className="text-blue-600 font-bold hover:text-blue-800 border-2 border-blue-600 px-3 py-1 rounded-md">
+                Panel Admin
+              </Link>
+            )}
             
             {/* Enlace al Carrito Móvil con contador escrito */}
             <Link 
