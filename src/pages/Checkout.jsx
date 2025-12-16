@@ -40,8 +40,8 @@ const Checkout = () => {
           Gracias por tu compra! Recibirás un email con tu factura.
         </p>
         <Link to="/" className="mt-8 bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition">
-  Volver al inicio
-</Link>
+          Volver al inicio
+        </Link>
       </div>
     );
   }
